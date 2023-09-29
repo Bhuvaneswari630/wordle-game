@@ -13,52 +13,54 @@
 
 <body>
     <div id="wordle-board" class="container">
-        <h1>Wordle web game</h1>
+        <h1>Wordle Web Game</h1>
+        <h2>Let's get started!!!</h2>
+        <h3>Guess a 5 letter word</h3>
         <div class="grid-container mb-3">
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
-            <div class="letter-box"></div>
+            <div class="letter-box" id="1"></div>
+            <div class="letter-box" id="2"></div>
+            <div class="letter-box" id="3"></div>
+            <div class="letter-box" id="4"></div>
+            <div class="letter-box" id="5"></div>
+            <div class="letter-box" id="6"></div>
+            <div class="letter-box" id="7"></div>
+            <div class="letter-box" id="8"></div>
+            <div class="letter-box" id="9"></div>
+            <div class="letter-box" id="10"></div>
+            <div class="letter-box" id="11"></div>
+            <div class="letter-box" id="12"></div>
+            <div class="letter-box" id="13"></div>
+            <div class="letter-box" id="14"></div>
+            <div class="letter-box" id="15"></div>
+            <div class="letter-box" id="16"></div>
+            <div class="letter-box" id="17"></div>
+            <div class="letter-box" id="18"></div>
+            <div class="letter-box" id="19"></div>
+            <div class="letter-box" id="20"></div>
+            <div class="letter-box" id="21"></div>
+            <div class="letter-box" id="22"></div>
+            <div class="letter-box" id="23"></div>
+            <div class="letter-box" id="24"></div>
+            <div class="letter-box" id="25"></div>
+            <div class="letter-box" id="26"></div>
+            <div class="letter-box" id="27"></div>
+            <div class="letter-box" id="28"></div>
+            <div class="letter-box" id="29"></div>
+            <div class="letter-box" id="30"></div>
         </div>
         <!-- create a keyboard -->
         <div class="keyboard-container">
             <div class="row1">
-                <button class="keyboard-btn" id="Q" onClick="getLetter(this.id)">Q</button>
-                <button class="keyboard-btn" id="W" onClick="getLetter(this.id)">W</button>
-                <button class="keyboard-btn" id="E" onClick="getLetter(this.id)">E</button>
-                <button class="keyboard-btn" id="R" onClick="getLetter(this.id)">R</button>
-                <button class="keyboard-btn" id="T" onClick="getLetter(this.id)">T</button>
-                <button class="keyboard-btn" id="Y" onClick="getLetter(this.id)">Y</button>
-                <button class="keyboard-btn" id="U" onClick="getLetter(this.id)">U</button>
-                <button class="keyboard-btn" id="I" onClick="getLetter(this.id)">I</button>
-                <button class="keyboard-btn" id="O" onClick="getLetter(this.id)">O</button>
-                <button class="keyboard-btn" id="P" onClick="getLetter(this.id)">P</button>
+                <button class="keyboard-btn" id="Q">Q</button>
+                <button class="keyboard-btn" id="W">W</button>
+                <button class="keyboard-btn" id="E">E</button>
+                <button class="keyboard-btn" id="R">R</button>
+                <button class="keyboard-btn" id="T">T</button>
+                <button class="keyboard-btn" id="Y">Y</button>
+                <button class="keyboard-btn" id="U">U</button>
+                <button class="keyboard-btn" id="I">I</button>
+                <button class="keyboard-btn" id="O">O</button>
+                <button class="keyboard-btn" id="P">P</button>
             </div>
             <div class="row2">
                 <button class="keyboard-btn" id="A">A</button>
@@ -82,6 +84,9 @@
                 <button class="keyboard-btn" id="M">M</button>
                 <button class="keyboard-btn" id="enter">Enter</button>
             </div>
+        </div>
+        <div>
+            <button id='refresh'>Refresh</button>
         </div>
     </div>
 
