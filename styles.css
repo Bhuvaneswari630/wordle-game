@@ -8,9 +8,10 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 80px);
     grid-template-rows: repeat(6, 80px);
-    background-color: rgb(205, 214, 214);
+    background-color: rgb(189, 197, 197);
     gap: 10px;
     padding: 10px;
+    border-radius: 10px;
 }
 
 .letter-box {
@@ -18,7 +19,7 @@ body {
     text-align: center;
     padding: 10px 0;
     font-size: 30px;
-    
+    border-radius: 10px;
     /* border: 1px solid black; */
 }
 
@@ -29,18 +30,20 @@ body {
 
 .keyboard-btn {
     margin: 3px;
+    background-color: rgb(189, 197, 197);
 }
 
 .green{
-    background-color: rgb(12, 226, 12);
+    background-color: #79b851;
 }
 .orange{
-    background-color: rgb(245, 202, 123);
+    background-color: #f3c237;
 }
 .gray {
-    background-color: rgb(180, 177, 177);
+    background-color: #dee1e9;
 }
 #refresh{
-    display: none;
+    display: block;
     margin: auto;
+    background-color: rgb(189, 197, 197);
 }
