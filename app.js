@@ -63,12 +63,6 @@ function main() {
                 // console.log(wordGuess.word.length);
                 guessContainer[letterBoxNo].textContent = letter;
                 // guessContainer[letterBoxNo].classList.add('gray')
-                // disable letter from keyboard if occurrence is one time
-                let noOccurrence = [...guessingWord.matchAll(new RegExp(letter, 'gi'))].map(a => a.index)
-                if (noOccurrence.length === 1) {
-                    // console.log(`no of occurrence of letter ${letter} is 1`);
-                    document.getElementById(letter).disabled = true
-                }
                 letterBoxNo += 1;
                 wordGuess.word.push(letter)
                 wordGuess.position.push(letterBoxNo)
@@ -83,6 +77,7 @@ function main() {
             wordGuess.word.pop()
             wordGuess.position.pop()
         }
+        // when user clicks enter button
         if (letter === 'enter') {
             console.log('Guess', wordGuess.word.join(''));
             // console.log('Guess position', wordGuess.position);
@@ -113,19 +108,51 @@ function main() {
                 }
                 // check for one time occurrance of letter
                 else if (arrayOfIndexes.length === 1) {
-                    if (guessLetterIndex === arrayOfIndexes[0]) {
-                        console.log(`${guessLetter} is at same position as answer`);
-                        letterColor = 'green';
+                    let guessArrayOfIndexes = [...wordGuess.word.join('').matchAll(new RegExp(guessLetter, 'gi'))].map(a => a.index);
+                    let tempPosition = 0
+                    let isAtSamePosition = false
+                    // checking if letter occurred once in guess word
+                    if (guessArrayOfIndexes === 1) {
+                        if (guessLetterIndex === arrayOfIndexes[0]) {
+                            console.log(`${guessLetter} is at same position as answer`);
+                            letterColor = 'green';
+                        } else {
+
+                            console.log(`${guessLetter} is at different position as answer`);
+                            letterColor = 'orange';
+                        }
                     } else {
-                        
-                        console.log(`${guessLetter} is at different position as answer`);
-                        letterColor = 'orange';
+                        // iterate duplicate letter in guess word to find correct position
+                        for (let i = 0; i < guessArrayOfIndexes.length; i++) {
+                            if (guessArrayOfIndexes[i] === arrayOfIndexes[0]) {
+                                tempPosition = i
+                                console.log('temp pos', tempPosition);
+                                console.log('array index', arrayOfIndexes);
+                                isAtSamePosition = true
+                            }
+                        }
+                        // same position
+                        if (guessLetterIndex === arrayOfIndexes[0] && isAtSamePosition === true) {
+                            console.log(`${guessLetter} is at same position as answer`);
+                            letterColor = 'green'
+                        }
+                        if (guessLetterIndex !== arrayOfIndexes[0] && isAtSamePosition === true) {
+                            console.log(`${guessLetter} is at different and duplicate as answer`);
+                            letterColor = 'gray'
+                        }
+                        if (guessLetterIndex !== arrayOfIndexes[0] && isAtSamePosition === false) {
+                            console.log(`${guessLetter} is at different as answer`);
+                            if (guessLetterIndex === guessArrayOfIndexes[0]) {
+                                letterColor = 'orange'
+                            } else {
+                                letterColor = 'gray'
+                            }
+                        }
                     }
                 }
-
                 // check for more than one occurrance of letter
                 else if (arrayOfIndexes.length > 1) {
-                    isAtSamePosition = false;
+                    let isAtSamePosition = false;
                     let tempIndex = 0
                     for (let i = 0; i < arrayOfIndexes.length; i++) {
                         if (guessLetterIndex === arrayOfIndexes[i]) {
