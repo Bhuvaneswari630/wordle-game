@@ -20,7 +20,16 @@ function getRandomWord() {
     // console.log(randomNo);
     return listOfWords[randomNo]
 }
-function main() {
+async function validateWord(word) {
+    let failed = false;
+    let response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    if (response.status == '404')  {
+      failed = true
+      console.log('Please enter valid english word');
+    }
+    return failed
+}
+async function main() {
     let letterBoxNo = 0;
     // Get a random word from list of words
     let guessingWord = getRandomWord();
@@ -51,10 +60,11 @@ function main() {
         guessingWord = getRandomWord()
         console.log('guessing word', guessingWord.toUpperCase().split(''));
     }
+   
     // Refresh page when refresh button clicked
     document.querySelector('#refresh').addEventListener('click', (e) => refreshPage())
     // Adding event listener for keyboard buttons
-    keyLetter.forEach((char) => char.addEventListener('click', (e) => {
+    keyLetter.forEach((char) => char.addEventListener('click', async (e) => {
         // console.log(letterBoxNo);
         const letter = e.target.id
 
@@ -79,6 +89,9 @@ function main() {
         }
         // when user clicks enter button
         if (letter === 'enter') {
+            // check if word entered is a valid word
+            // const validateWord = await validateWord(wordGuess.word.join(''))
+            console.log('valid word', validateWord);
             console.log('Guess', wordGuess.word.join(''));
             // console.log('Guess position', wordGuess.position);
             document.querySelectorAll('.keyboard-btn').forEach((btn) => btn.disabled = false)
