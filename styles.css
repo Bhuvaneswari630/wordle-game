@@ -56,15 +56,30 @@ body {
 #winning-status{
     display: none;
 }
-.box {
-    width: 100px;
-    height: 100px;
-    background-color: blue;
-    transition: width 0.5s, height 0.5s, background-color 0.5s;
+.popup-content {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #dee1e9;
+    padding: 20px;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: pop-up 0.5s ease-out forwards;
 }
 
-.box:hover {
-    width: 150px;
-    height: 150px;
-    background-color: red;
+@keyframes pop-up {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.popup-button {
+    margin-top: 100px;
 }

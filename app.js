@@ -203,7 +203,7 @@ async function main() {
             }
             if (letterBoxNo > guessContainer.length - 1) {
                 console.log('End of guesses');
-                document.getElementById('refresh').style.display = 'block';
+                // document.getElementById('refresh').style.display = 'block';
                 // refreshPage()
                 winStatus.textContent = 'You Lost!'
                 winStatus.style.display = 'block'
