@@ -5,6 +5,17 @@ Rules:
 3. The color of the tiles will change to show how close your guess to the word
 
 Logic:
-Random word is selected from list of words array as of now
-Find the position of guessed word to give clues to user when a valid 5-letter word is entered
-Tile color changes accordingly
+Random word is selected from list of words array using getRandomWord function.
+Add event listeners to keyboard buttons.
+Find the position of guessed word to give clues to user when a valid 5-letter word is entered.
+Tile color changes accordingly:
+1, Letter in correct position - green color
+2, Letter exists - orange color
+3, Letter not matched - gray color
+
+Citations
+To find indeces of all occurence of a letter :
+https://stackoverflow.com/questions/3410464/how-to-find-indices-of-all-occurrences-of-one-string-in-another-in-javascript 
+
+
+

@@ -53,30 +53,41 @@ body {
     margin: auto;
     background-color: rgb(189, 197, 197);
 }
-#winning-status{
+.hide{
     display: none;
 }
-.popup-content {
+#winning-status{
     display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #dee1e9;
+    position: relative;
+    font-size: 30px;
+    background-color: #79b851;
     padding: 20px;
     border: 2px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: pop-up 0.5s ease-out forwards;
+}
+.popup-content {
+    display: block;
+    position: relative;
+    top: 50%;
+    left: 505;
+    /* transform: translate(-50%, -50%); */
+    background-color: #7de93f;
+    padding: 20px;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.animate{
+    animation: pop-up 1s ease-out forwards;
 }
 
 @keyframes pop-up {
     0% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0);
+        transform: scale(0);
     }
     100% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+        transform: scale(1);
     }
 }
 
