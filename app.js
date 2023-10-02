@@ -38,6 +38,7 @@ async function main() {
     const guessContainer = document.querySelectorAll('.letter-box')
     // console.log(guessContainer.length);
     const keyLetter = document.querySelectorAll('.keyboard-btn')
+    const winStatus = document.querySelector('#winning-status')
     let wordGuess = {
         word: [],
         position: []
@@ -50,11 +51,12 @@ async function main() {
             div.classList.remove('green')
             div.classList.remove('gray')
             letterBoxNo = 0;
-            // document.getElementById('refresh').style.display = 'block';
         })
         keyLetter.forEach((key) => {
             key.classList.remove('gray');
         })
+        winStatus.textContent = ''
+        winStatus.style.display = 'none'
         wordGuess.word = [];
         wordGuess.position = [];
         guessingWord = getRandomWord()
@@ -94,7 +96,7 @@ async function main() {
             console.log('valid word', validateWord);
             console.log('Guess', wordGuess.word.join(''));
             // console.log('Guess position', wordGuess.position);
-            document.querySelectorAll('.keyboard-btn').forEach((btn) => btn.disabled = false)
+            // document.querySelectorAll('.keyboard-btn').forEach((btn) => btn.disabled = false)
             if (wordGuess.word.length < 5) {
                 console.log('Guess a 5 letters word');
                 return
@@ -183,13 +185,17 @@ async function main() {
                     tempIndex = 0
                 }
                 // color the letter according to position is correct or not
-                console.log('letter color', letterColor);
+                console.log('letter color', letterColor + 'guessletter ',guessLetter);
                 document.getElementById(letterBoxPos).classList.add(letterColor);
+                // document.getElementById(guessLetter).classList.add(letterColor);
             }
+           
             //All letters found 
             if (wordGuess.word.join('').toLowerCase() == guessingWord) {
                 console.log('You win');
-                document.getElementById('refresh').style.display = 'block';
+                // document.getElementById('refresh').style.display = 'block';
+                winStatus.textContent = 'You Win!!!'
+                winStatus.style.display = 'block'
                 letterBoxNo = 0;
                 wordGuess.word = [];
                 wordGuess.position = [];
@@ -199,6 +205,8 @@ async function main() {
                 console.log('End of guesses');
                 document.getElementById('refresh').style.display = 'block';
                 // refreshPage()
+                winStatus.textContent = 'You Lost!'
+                winStatus.style.display = 'block'
                 return
             }
             wordGuess.word = [];

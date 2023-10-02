@@ -15,7 +15,7 @@
     <div id="wordle-board" class="container">
         <h1>Wordle Web Game</h1>
         <h2>Let's get started!!!</h2>
-        <h3>Guess a 5 letter word</h3>
+        <h3>Guess a 5-letter word</h3>
         <div class="grid-container mb-3">
             <div class="letter-box" id="1"></div>
             <div class="letter-box" id="2"></div>
@@ -50,7 +50,7 @@
         </div>
         <!-- create a keyboard -->
         <div class="keyboard-container">
-            <div class="row1">
+            <div class="row">
                 <button class="btn keyboard-btn" id="Q">Q</button>
                 <button class="btn keyboard-btn" id="W">W</button>
                 <button class="btn keyboard-btn" id="E">E</button>
@@ -62,7 +62,7 @@
                 <button class="btn keyboard-btn" id="O">O</button>
                 <button class="btn keyboard-btn" id="P">P</button>
             </div>
-            <div class="row2">
+            <div class="row">
                 <button class="btn keyboard-btn" id="A">A</button>
                 <button class="btn keyboard-btn" id="S">S</button>
                 <button class="btn keyboard-btn" id="D">D</button>
@@ -73,8 +73,8 @@
                 <button class="btn keyboard-btn" id="K">K</button>
                 <button class="btn keyboard-btn" id="L">L</button>
             </div>
-            <div class="row3">
-                <button class="btn keyboard-btn" id="delete">Del</button>
+            <div class="row">
+                <button class="btn keyboard-btn" id="delete">Delete</button>
                 <button class="btn keyboard-btn" id="Z">Z</button>
                 <button class="btn keyboard-btn" id="X">X</button>
                 <button class="btn keyboard-btn" id="C">C</button>
@@ -88,6 +88,8 @@
         <div>
             <button id='refresh' class="btn">Refresh</button>
         </div>
+        <div id="winning-status"></div>
+        <div class="box"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
