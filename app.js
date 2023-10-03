@@ -164,7 +164,7 @@ keyLetter.forEach((char) => char.addEventListener('click', async (e) => {
             console.log('letter color', letterColor + 'guessletter ', guessLetter);
             document.getElementById(letterBoxPos).classList.add(letterColor);
             document.getElementById(letterBoxPos).classList.add('white-font');
-            document.getElementById(letterBoxPos).classList.add('animate');
+            document.getElementById(letterBoxPos).classList.add('flip-animate');
             // document.getElementById(guessLetter).classList.add(letterColor);
         }
 
@@ -203,7 +203,8 @@ function refreshPage() {
         div.classList.remove('orange')
         div.classList.remove('green')
         div.classList.remove('gray')
-        div.classList.remove('animate')
+        div.classList.remove('white-font')
+        div.classList.remove('flip-animate')
         letterBoxNo = 0;
     })
     keyLetter.forEach((key) => {

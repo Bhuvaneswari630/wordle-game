@@ -3,9 +3,11 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     /* background: linear-gradient(100deg, #9cffa9, #71d0fc); */
 }
-.container{
+
+.container {
     margin: auto;
 }
+
 .grid-container {
     /* width:410px; */
     width: 25em;
@@ -30,22 +32,30 @@ body {
     font-size: 1.75em;
     font-weight: 500;
     border-radius: 10px;
-    border: 1px solid rgb(172, 169, 169);
+    border: 1px solid #dee1e9;
 }
+
 .white-font {
     color: #fff;
     font-weight: 600;
 }
+
 .row {
     display: flex;
     width: 28em;
     margin: auto;
+    flex-direction: row;
     justify-content: space-between;
+}
+
+.keyboard-container {
+    display: flex;
+    flex-direction: column;
 }
 
 .keyboard-btn {
     margin: 3px;
-    background-color: rgb(189, 197, 197);
+    background-color: #e5e7eb;
 }
 
 .green {
@@ -57,13 +67,13 @@ body {
 }
 
 .gray {
-    background-color: #c1c3c9;
+    background-color: #b6bdcc;
 }
 
 #refresh {
     display: block;
     margin: auto;
-    background-color: rgb(189, 197, 197);
+    background-color: #e5e7eb;
 }
 
 .hide {
@@ -71,6 +81,8 @@ body {
 }
 
 #winning-status {
+    width: 20%;
+    margin: auto;
     display: none;
     position: relative;
     font-size: 1em;
@@ -100,5 +112,19 @@ body {
     100% {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+.flip-animate {
+    animation: flip-out 1s ease-in
+}
+
+@keyframes flip-out {
+    0% {
+        transform: rotateY(-90deg)
+    }
+
+    100% {
+        transform: rotateY(0)
     }
 }
