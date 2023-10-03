@@ -51,16 +51,28 @@ keyLetter.forEach((char) => char.addEventListener('click', async (e) => {
         wordGuess.word.pop()
         wordGuess.position.pop()
     }
+   
     // when user clicks enter button
     if (letter === 'enter') {
         console.log('Guess', wordGuess.word.join(''));
-        // check if word entered is a valid word
-        // const validateWord = await validateWord(wordGuess.word.join(''))
-        // console.log('valid word', validateWord);
-        // console.log('Guess position', wordGuess.position);
-        // document.querySelectorAll('.keyboard-btn').forEach((btn) => btn.disabled = false)
+        // Check if entered word is 5-letter word
         if (wordGuess.word.length < 5) {
             console.log('Guess a 5 letters word');
+            return
+        }
+        // check if word entered is a valid word
+        const validateStatus = await validateWord(wordGuess.word.join(''))
+        console.log('not a valid word', validateStatus);
+        if (validateStatus) {
+            let validStatusDiv = document.createElement('div')
+            validStatusDiv.classList.add('popup-content')
+            validStatusDiv.classList.add('alert')
+            validStatusDiv.classList.add('alert-warning')
+            validStatusDiv.textContent = 'Enter a valid word'
+            document.querySelector('.grid-container').append(validStatusDiv)
+            setTimeout(() => {
+                validStatusDiv.classList.add('hide')
+            }, 1000);
             return
         }
 
@@ -151,6 +163,7 @@ keyLetter.forEach((char) => char.addEventListener('click', async (e) => {
             // color the letter according to position is correct or not
             console.log('letter color', letterColor + 'guessletter ', guessLetter);
             document.getElementById(letterBoxPos).classList.add(letterColor);
+            document.getElementById(letterBoxPos).classList.add('white-font');
             document.getElementById(letterBoxPos).classList.add('animate');
             // document.getElementById(guessLetter).classList.add(letterColor);
         }
@@ -162,6 +175,7 @@ keyLetter.forEach((char) => char.addEventListener('click', async (e) => {
             winStatus.textContent = 'You Win!!!'
             winStatus.style.display = 'block'
             winStatus.classList.add('animate')
+            winStatus.classList.add('green')
             letterBoxNo = 0;
             wordGuess.word = [];
             wordGuess.position = [];
@@ -171,8 +185,10 @@ keyLetter.forEach((char) => char.addEventListener('click', async (e) => {
             console.log('End of guesses');
             // document.getElementById('refresh').style.display = 'block';
             // refreshPage()
-            winStatus.textContent = 'You Lost!'
+            winStatus.innerHTML = `<p>You Lost!</p><p>Correct answer is ${guessingWord.toUpperCase()}</p>`
             winStatus.style.display = 'block'
+            winStatus.classList.add('animate')
+            winStatus.classList.add('orange')
             return
         }
         wordGuess.word = [];
@@ -187,6 +203,7 @@ function refreshPage() {
         div.classList.remove('orange')
         div.classList.remove('green')
         div.classList.remove('gray')
+        div.classList.remove('animate')
         letterBoxNo = 0;
     })
     keyLetter.forEach((key) => {

@@ -1,82 +1,93 @@
 body {
     text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     /* background: linear-gradient(100deg, #9cffa9, #71d0fc); */
 }
-
+.container{
+    margin: auto;
+}
 .grid-container {
-    width:410px;
+    /* width:410px; */
+    width: 25em;
+    height: 34em;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(5, 70px);
     grid-template-rows: repeat(6, 70px);
-    background-color: rgb(189, 197, 197);
-    gap: 10px;
+    /* background-color: rgb(189, 197, 197); */
+    gap: 1em;
     padding: 10px;
     border-radius: 10px;
 }
 
 .letter-box {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #fbfcff;
+    /* width: 1.7em;
+    height: 1.7em; */
     text-align: center;
     padding: 10px 0;
-    font-size: 30px;
+    /* font-size: 30px; */
+    font-size: 1.75em;
+    font-weight: 500;
     border-radius: 10px;
-    /* border: 1px solid black; */
+    border: 1px solid rgb(172, 169, 169);
 }
-
-.letter-box > p {
-    width: 40px;
-    height: 40px;
+.white-font {
+    color: #fff;
+    font-weight: 600;
 }
-.row{
+.row {
     display: flex;
-    width: 450px;
+    width: 28em;
     margin: auto;
     justify-content: space-between;
 }
+
 .keyboard-btn {
     margin: 3px;
     background-color: rgb(189, 197, 197);
 }
 
-.green{
+.green {
     background-color: #79b851;
 }
-.orange{
+
+.orange {
     background-color: #f3c237;
 }
+
 .gray {
-    background-color: #dee1e9;
+    background-color: #c1c3c9;
 }
-#refresh{
+
+#refresh {
     display: block;
     margin: auto;
     background-color: rgb(189, 197, 197);
 }
-.hide{
+
+.hide {
     display: none;
 }
-#winning-status{
+
+#winning-status {
     display: none;
     position: relative;
-    font-size: 30px;
-    background-color: #79b851;
+    font-size: 1em;
     padding: 20px;
-    border: 2px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .popup-content {
-    display: block;
-    position: relative;
-    top: 50%;
-    left: 505;
-    /* transform: translate(-50%, -50%); */
-    background-color: #7de93f;
+    position: absolute;
+    top: 42%;
+    left: 44%;
     padding: 20px;
     border: 2px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.animate{
+
+.animate {
     animation: pop-up 1s ease-out forwards;
 }
 
@@ -85,12 +96,9 @@ body {
         opacity: 0;
         transform: scale(0);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.popup-button {
-    margin-top: 100px;
 }
