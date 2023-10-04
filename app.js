@@ -13,93 +13,155 @@ const listOfWords = [
 const guessContainer = document.querySelectorAll('.letter-box')
 const keyLetter = document.querySelectorAll('.keyboard-btn')
 const winStatus = document.querySelector('#winning-status')
-let wordGuess = {
+const message = document.querySelector('.message')
+let currentGuess = {
     word: [],
     position: []
 };
 let letterBoxNo = 0;
+let word = ''
 // Get a random word from list of words
 let guessingWord = getRandomWord();
 // let guessingWord = 'rooms'
-console.log('guessing word', guessingWord.toUpperCase().split(''));
+console.log('guessing word', guessingWord.toUpperCase());
 
 
 // Refresh page when refresh button clicked
-document.querySelector('#refresh').addEventListener('click', (e) => refreshPage())
+document.querySelector('#refresh').addEventListener('click', () => refreshPage())
 
 // Adding event listener for keyboard buttons
-keyLetter.forEach((char) => char.addEventListener('click', async (e) => {
-    // console.log(letterBoxNo);
+keyLetter.forEach((char) => char.addEventListener('click', async (e) => handleInput(e)))
+
+async function handleInput(e) {
     const letter = e.target.id
+    writeInput(letter)
+    validateInput(letter)
+}
 
-    if (letter !== 'delete' && letter !== 'enter') {
-        if (wordGuess.word.length < 5) {
-            // console.log(wordGuess.word.length);
-            guessContainer[letterBoxNo].textContent = letter;
-            // guessContainer[letterBoxNo].classList.add('gray')
+function refreshPage() {
+    guessContainer.forEach((div) => {
+        div.textContent = ''
+        div.classList.remove('orange')
+        div.classList.remove('green')
+        div.classList.remove('gray')
+        div.classList.remove('white-font')
+        div.classList.remove('flip-animate')
+        div.classList.remove('highlight')
+        letterBoxNo = 0;
+    })
+    guessContainer[1].focus();
+    keyLetter.forEach((key) => {
+        key.classList.remove('keyboard-gray');
+        key.classList.remove('white-font');
+    })
+    winStatus.innerHTML = ''
+    winStatus.textContent = ''
+    winStatus.style.display = 'none'
+    currentGuess.word = [];
+    currentGuess.position = [];
+    guessingWord = getRandomWord()
+    console.log('guessing word', guessingWord.toUpperCase().split(''));
+    document.getElementById('enter').disabled = false
+    document.getElementById('delete').disabled = false
+}
+
+function getRandomWord() {
+    let randomNo = Math.floor(Math.random() * listOfWords.length);
+    return listOfWords[randomNo]
+}
+async function validateWord(word) {
+    let failed = false;
+    let response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    if (response.status == '404') {
+        failed = true
+        console.log('Please enter valid english word');
+    }
+    return failed
+}
+
+function writeInput(letter) {
+    // if alphabets entered
+    if (letter !== 'delete' && letter !== 'enter' && letter !== 'refresh') {
+        // Write only words length is less than 5
+        if (currentGuess.word.length < 5) {
+            // console.log(currentGuess.word.length);
+            guessContainer[letterBoxNo].value = letter;
+            guessContainer[letterBoxNo].classList.add('highlight');
             letterBoxNo += 1;
-            wordGuess.word.push(letter)
-            wordGuess.position.push(letterBoxNo)
+            currentGuess.word.push(letter)
+            currentGuess.position.push(letterBoxNo)
         }
-        console.log(wordGuess.word);
+        if(currentGuess.word.length == 5) {
+            console.log(currentGuess.word);
+        }
+        // guessContainer[letterBoxNo].disabled = true
+    }
 
-    }
-    if (letter === 'delete') {
-        guessContainer[letterBoxNo - 1].textContent = '';
-        guessContainer[letterBoxNo - 1].classList.remove('gray')
-        letterBoxNo -= 1;
-        wordGuess.word.pop()
-        wordGuess.position.pop()
-    }
-   
-    // when user clicks enter button
-    if (letter === 'enter') {
-        console.log('Guess', wordGuess.word.join(''));
-        // Check if entered word is 5-letter word
-        if (wordGuess.word.length < 5) {
-            console.log('Guess a 5 letters word');
+    if (letter === 'delete' && letterBoxNo > word.length) {
+        if (letterBoxNo <= 0) {
+            document.getElementById('delete').disabled = true
             return
         }
-        // check if word entered is a valid word
-        const validateStatus = await validateWord(wordGuess.word.join(''))
-        console.log('not a valid word', validateStatus);
-        if (validateStatus) {
-            let validStatusDiv = document.createElement('div')
-            validStatusDiv.classList.add('popup-content')
-            validStatusDiv.classList.add('alert')
-            validStatusDiv.classList.add('alert-warning')
-            validStatusDiv.textContent = 'Enter a valid word'
-            document.querySelector('.grid-container').append(validStatusDiv)
+        guessContainer[letterBoxNo - 1].value = '';
+        guessContainer[letterBoxNo - 1].classList.remove('highlight');
+        letterBoxNo -= 1;
+        currentGuess.word.pop()
+        currentGuess.position.pop()
+    }
+}
+async function validateInput(letter) {
+    // when user clicks enter button
+    if (letter === 'enter') {
+        console.log('Guess', currentGuess.word.join(''));
+        // Check if entered word is 5-letter word
+        if (currentGuess.word.length < 5) {
+            message.textContent = 'Guess a 5 letter word'
+            message.classList.remove('hide')
+            // message.classList.add('animate')
+            console.log('Guess a 5 letters word');
             setTimeout(() => {
-                validStatusDiv.classList.add('hide')
+                message.classList.add('hide')
+                // message.classList.remove('animate')
             }, 1000);
             return
         }
-
+        // check if word entered is a valid word
+        const validateStatus = await validateWord(currentGuess.word.join(''))
+        console.log('not a valid word', validateStatus);
+        if (validateStatus) {
+            message.textContent = 'Enter a valid word'
+            message.classList.remove('hide')
+            console.log('Guess a 5 letters word');
+            setTimeout(() => {
+                message.classList.add('hide')
+            }, 2000);
+            return
+        }
+        word += currentGuess.word.join('')
+        console.log('word: ', word);
         // let answer = guessingWord.toUpperCase().split('')
         var letterColor = '';
         // Iterate thru guess word 
-        for (let i = 0; i < wordGuess.word.length; i++) {
-            let guessLetter = wordGuess.word[i]
-            let letterBoxPos = wordGuess.position[i]
-            // console.log('letter box position', letterBoxPos);
-            // console.log(document.getElementById(letterBoxPos));
+        for (let i = 0; i < currentGuess.word.length; i++) {
+            let guessLetter = currentGuess.word[i]
+            let letterBoxPos = currentGuess.position[i]
             let guessLetterIndex = i;
+
             // To find indeces of all occurence of a letter 
             // https://stackoverflow.com/questions/3410464/how-to-find-indices-of-all-occurrences-of-one-string-in-another-in-javascript 
             const arrayOfIndices = [...guessingWord.matchAll(new RegExp(guessLetter, 'gi'))].map(a => a.index);
-            // console.log(arrayOfIndices);
-            // console.log([...guessingWord.matchAll(new RegExp(guessLetter, 'gi'))]);
 
             // Check for letter not found
             if (arrayOfIndices.length === 0) {
                 console.log(`${guessLetter} not found in answer`);
                 letterColor = 'gray'
-                document.getElementById(guessLetter.toUpperCase()).classList.add('gray')
+
+                document.getElementById(guessLetter.toUpperCase()).classList.add('keyboard-gray')
+                document.getElementById(guessLetter.toUpperCase()).classList.add('white-font')
             }
             // check for one time occurrance of letter
             else if (arrayOfIndices.length === 1) {
-                let guessArrayOfIndices = [...wordGuess.word.join('').matchAll(new RegExp(guessLetter, 'gi'))].map(a => a.index);
+                let guessArrayOfIndices = [...currentGuess.word.join('').matchAll(new RegExp(guessLetter, 'gi'))].map(a => a.index);
                 let tempPosition = 0
                 let isAtSamePosition = false
                 // checking if letter occurred once in guess word
@@ -165,70 +227,34 @@ keyLetter.forEach((char) => char.addEventListener('click', async (e) => {
             document.getElementById(letterBoxPos).classList.add(letterColor);
             document.getElementById(letterBoxPos).classList.add('white-font');
             document.getElementById(letterBoxPos).classList.add('flip-animate');
-            // document.getElementById(guessLetter).classList.add(letterColor);
+            document.getElementById(letterBoxPos).classList.remove('highlight');
         }
 
         //All letters found 
-        if (wordGuess.word.join('').toLowerCase() == guessingWord) {
+        if (currentGuess.word.join('').toLowerCase() == guessingWord) {
             console.log('You win');
             // document.getElementById('refresh').style.display = 'block';
-            winStatus.textContent = 'You Win!!!'
+            winStatus.textContent = 'You Won!!!'
             winStatus.style.display = 'block'
             winStatus.classList.add('animate')
             winStatus.classList.add('green')
+            winStatus.classList.remove('orange')
             letterBoxNo = 0;
-            wordGuess.word = [];
-            wordGuess.position = [];
+            currentGuess.word = [];
+            currentGuess.position = [];
+            document.getElementById('enter').disabled = true
             return
         }
         if (letterBoxNo > guessContainer.length - 1) {
             console.log('End of guesses');
-            // document.getElementById('refresh').style.display = 'block';
-            // refreshPage()
-            winStatus.innerHTML = `<p>You Lost!</p><p>Correct answer is ${guessingWord.toUpperCase()}</p>`
+            winStatus.textContent = `You Lost! Correct answer is ${guessingWord.toUpperCase()}`
             winStatus.style.display = 'block'
             winStatus.classList.add('animate')
             winStatus.classList.add('orange')
+            winStatus.classList.remove('green')
             return
         }
-        wordGuess.word = [];
-        wordGuess.position = [];
+        currentGuess.word = [];
+        currentGuess.position = [];
     }
-
-}))
-
-function refreshPage() {
-    guessContainer.forEach((div) => {
-        div.textContent = ''
-        div.classList.remove('orange')
-        div.classList.remove('green')
-        div.classList.remove('gray')
-        div.classList.remove('white-font')
-        div.classList.remove('flip-animate')
-        letterBoxNo = 0;
-    })
-    keyLetter.forEach((key) => {
-        key.classList.remove('gray');
-    })
-    winStatus.textContent = ''
-    winStatus.style.display = 'none'
-    wordGuess.word = [];
-    wordGuess.position = [];
-    guessingWord = getRandomWord()
-    console.log('guessing word', guessingWord.toUpperCase().split(''));
-}
-
-function getRandomWord() {
-    let randomNo = Math.floor(Math.random() * listOfWords.length);
-    // console.log(randomNo);
-    return listOfWords[randomNo]
-}
-async function validateWord(word) {
-    let failed = false;
-    let response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-    if (response.status == '404') {
-        failed = true
-        console.log('Please enter valid english word');
-    }
-    return failed
 }

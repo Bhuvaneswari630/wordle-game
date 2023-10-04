@@ -13,44 +13,47 @@
 
 <body>
     <!-- <div class="container"> -->
-        <div id="wordle-board" class="container">
-            <h1>Wordle Web Game</h1>
-            <h3>Guess a 5-letter word</h3>
-            <div class="grid-container mb-3">
-                <div class="letter-box" id="1"></div>
-                <div class="letter-box" id="2"></div>
-                <div class="letter-box" id="3"></div>
-                <div class="letter-box" id="4"></div>
-                <div class="letter-box" id="5"></div>
-                <div class="letter-box" id="6"></div>
-                <div class="letter-box" id="7"></div>
-                <div class="letter-box" id="8"></div>
-                <div class="letter-box" id="9"></div>
-                <div class="letter-box" id="10"></div>
-                <div class="letter-box" id="11"></div>
-                <div class="letter-box" id="12"></div>
-                <div class="letter-box" id="13"></div>
-                <div class="letter-box" id="14"></div>
-                <div class="letter-box" id="15"></div>
-                <div class="letter-box" id="16"></div>
-                <div class="letter-box" id="17"></div>
-                <div class="letter-box" id="18"></div>
-                <div class="letter-box" id="19"></div>
-                <div class="letter-box" id="20"></div>
-                <div class="letter-box" id="21"></div>
-                <div class="letter-box" id="22"></div>
-                <div class="letter-box" id="23"></div>
-                <div class="letter-box" id="24"></div>
-                <div class="letter-box" id="25"></div>
-                <div class="letter-box" id="26"></div>
-                <div class="letter-box" id="27"></div>
-                <div class="letter-box" id="28"></div>
-                <div class="letter-box" id="29"></div>
-                <div class="letter-box" id="30"></div>
+    <div id="wordle-board" class="container">
+        <h1>Wordle Web Game</h1>
+        <!-- <h3>Guess a 5-letter word</h3> -->
+        <div class="game-board">
+            <div class="grid-container mb-1">
+                <input type="text" maxlength="1" class="letter-box" id="1">
+                <input type="text" maxlength="1" class="letter-box" id="2">
+                <input type="text" maxlength="1" class="letter-box" id="3">
+                <input type="text" maxlength="1" class="letter-box" id="4">
+                <input type="text" maxlength="1" class="letter-box" id="5">
+                <input type="text" maxlength="1" class="letter-box" id="6">
+                <input type="text" maxlength="1" class="letter-box" id="7">
+                <input type="text" maxlength="1" class="letter-box" id="8">
+                <input type="text" maxlength="1" class="letter-box" id="9">
+                <input type="text" maxlength="1" class="letter-box" id="10">
+                <input type="text" maxlength="1" class="letter-box" id="11">
+                <input type="text" maxlength="1" class="letter-box" id="12">
+                <input type="text" maxlength="1" class="letter-box" id="13">
+                <input type="text" maxlength="1" class="letter-box" id="14">
+                <input type="text" maxlength="1" class="letter-box" id="15">
+                <input type="text" maxlength="1" class="letter-box" id="16">
+                <input type="text" maxlength="1" class="letter-box" id="17">
+                <input type="text" maxlength="1" class="letter-box" id="18">
+                <input type="text" maxlength="1" class="letter-box" id="19">
+                <input type="text" maxlength="1" class="letter-box" id="20">
+                <input type="text" maxlength="1" class="letter-box" id="21">
+                <input type="text" maxlength="1" class="letter-box" id="22">
+                <input type="text" maxlength="1" class="letter-box" id="23">
+                <input type="text" maxlength="1" class="letter-box" id="24">
+                <input type="text" maxlength="1" class="letter-box" id="25">
+                <input type="text" maxlength="1" class="letter-box" id="26">
+                <input type="text" maxlength="1" class="letter-box" id="27">
+                <input type="text" maxlength="1" class="letter-box" id="28">
+                <input type="text" maxlength="1" class="letter-box" id="29">
+                <input type="text" maxlength="1" class="letter-box" id="30">
             </div>
+            <div id="winning-status"></div>
+            <div class="message alert alert-warning hide"></div>
             <!-- create a keyboard -->
-            <div class="keyboard-container">
-                <div class="row">
+            <div class="keyboard-container mt-1">
+                <div class="keyboard-row">
                     <button class="btn keyboard-btn" id="Q">Q</button>
                     <button class="btn keyboard-btn" id="W">W</button>
                     <button class="btn keyboard-btn" id="E">E</button>
@@ -62,7 +65,7 @@
                     <button class="btn keyboard-btn" id="O">O</button>
                     <button class="btn keyboard-btn" id="P">P</button>
                 </div>
-                <div class="row">
+                <div class="keyboard-row">
                     <button class="btn keyboard-btn" id="A">A</button>
                     <button class="btn keyboard-btn" id="S">S</button>
                     <button class="btn keyboard-btn" id="D">D</button>
@@ -73,7 +76,7 @@
                     <button class="btn keyboard-btn" id="K">K</button>
                     <button class="btn keyboard-btn" id="L">L</button>
                 </div>
-                <div class="row">
+                <div class="keyboard-row">
                     <button class="btn keyboard-btn" id="delete">Delete</button>
                     <button class="btn keyboard-btn" id="Z">Z</button>
                     <button class="btn keyboard-btn" id="X">X</button>
@@ -85,11 +88,11 @@
                     <button class="btn keyboard-btn" id="enter">Enter</button>
                 </div>
             </div>
-            <div>
-                <button id='refresh' class="btn mb-3">Refresh</button>
-            </div>
-            <div id="winning-status"></div>
         </div>
+        <div>
+            <button id='refresh' class="btn keyboard-btn mt-1">Refresh</button>
+        </div>
+    </div>
     <!-- </div> -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

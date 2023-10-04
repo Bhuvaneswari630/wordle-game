@@ -5,13 +5,17 @@ Rules:
 3, The color of the tiles will change to show how close your guess to the word
 
 Logic:
-Random word is selected from list of words array using getRandomWord function.
+Random word is selected from list of words array.
 Add event listeners to keyboard buttons.
-Find the position of guessed word to give clues to user when a valid 5-letter word is entered.
+Find the position of each letter of guessed word to give clues to user when a valid 5-letter word is entered.
 Tile color changes accordingly:
 1, Letter in correct position - green color
 2, Letter exists - orange color
 3, Letter not matched - gray color
+
+Functionalities in the game.
+refreshPage - resets the game board
+getRandommWord - 
 
 Citations
 To find indeces of all occurence of a letter :
