@@ -4,7 +4,7 @@ const listOfWords = [
     'chair', 'chart', 'chase', 'cheap',
     'check', 'rooms', 'sleek', "alert",
     "check", "roast", "toast", "shred",
-    "cheek", "shock", "czech", "woman",
+    "cheek", "shock", "think", "woman",
     "wreck", "court", "coast", "flake",
     "think", "smoke", "unrig", "slant",
     "ultra", "vague", "pouch", "radix",
@@ -39,17 +39,17 @@ async function handleInput(e) {
 }
 
 function refreshPage() {
-    guessContainer.forEach((div) => {
-        div.textContent = ''
-        div.classList.remove('orange')
-        div.classList.remove('green')
-        div.classList.remove('gray')
-        div.classList.remove('white-font')
-        div.classList.remove('flip-animate')
-        div.classList.remove('highlight')
+    guessContainer.forEach((input) => {
+        input.value = ''
+        input.classList.remove('orange')
+        input.classList.remove('green')
+        input.classList.remove('gray')
+        input.classList.remove('white-font')
+        input.classList.remove('flip-animate')
+        input.classList.remove('highlight')
         letterBoxNo = 0;
     })
-    guessContainer[1].focus();
+    // guessContainer[0].focus();
     keyLetter.forEach((key) => {
         key.classList.remove('keyboard-gray');
         key.classList.remove('white-font');
@@ -98,10 +98,6 @@ function writeInput(letter) {
     }
 
     if (letter === 'delete' && letterBoxNo > word.length) {
-        if (letterBoxNo <= 0) {
-            document.getElementById('delete').disabled = true
-            return
-        }
         guessContainer[letterBoxNo - 1].value = '';
         guessContainer[letterBoxNo - 1].classList.remove('highlight');
         letterBoxNo -= 1;
