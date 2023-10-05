@@ -21,9 +21,9 @@ let currentGuess = {
 let letterBoxNo = 0;
 let word = ''
 // Get a random word from list of words
-let guessingWord = getRandomWord();
-// let guessingWord = 'rooms'
-console.log('guessing word', guessingWord.toUpperCase());
+let randomWord = getRandomWord();
+// let randomWord = 'rooms'
+console.log('guessing word', randomWord.toUpperCase());
 
 
 // Refresh page when refresh button clicked
@@ -59,10 +59,11 @@ function refreshPage() {
     winStatus.style.display = 'none'
     currentGuess.word = [];
     currentGuess.position = [];
-    guessingWord = getRandomWord()
-    console.log('guessing word', guessingWord.toUpperCase().split(''));
+    randomWord = getRandomWord()
+    console.log('guessing word', randomWord.toUpperCase().split(''));
     document.getElementById('enter').disabled = false
     document.getElementById('delete').disabled = false
+    word = ''
 }
 
 function getRandomWord() {
@@ -91,10 +92,9 @@ function writeInput(letter) {
             currentGuess.word.push(letter)
             currentGuess.position.push(letterBoxNo)
         }
-        if(currentGuess.word.length == 5) {
+        if (currentGuess.word.length == 5) {
             console.log(currentGuess.word);
         }
-        // guessContainer[letterBoxNo].disabled = true
     }
 
     if (letter === 'delete' && letterBoxNo > word.length) {
@@ -105,37 +105,28 @@ function writeInput(letter) {
         currentGuess.position.pop()
     }
 }
+
 async function validateInput(letter) {
     // when user clicks enter button
     if (letter === 'enter') {
         console.log('Guess', currentGuess.word.join(''));
+        
         // Check if entered word is 5-letter word
         if (currentGuess.word.length < 5) {
-            message.textContent = 'Guess a 5 letter word'
-            message.classList.remove('hide')
-            // message.classList.add('animate')
-            console.log('Guess a 5 letters word');
-            setTimeout(() => {
-                message.classList.add('hide')
-                // message.classList.remove('animate')
-            }, 1000);
+            createMessage('Guess a 5 letter word')
             return
         }
+        
         // check if word entered is a valid word
         const validateStatus = await validateWord(currentGuess.word.join(''))
-        console.log('not a valid word', validateStatus);
         if (validateStatus) {
-            message.textContent = 'Enter a valid word'
-            message.classList.remove('hide')
-            console.log('Guess a 5 letters word');
-            setTimeout(() => {
-                message.classList.add('hide')
-            }, 2000);
+            createMessage('Enter a valid word')
             return
         }
+        
         word += currentGuess.word.join('')
         console.log('word: ', word);
-        // let answer = guessingWord.toUpperCase().split('')
+        // let answer = randomWord.toUpperCase().split('')
         var letterColor = '';
         // Iterate thru guess word 
         for (let i = 0; i < currentGuess.word.length; i++) {
@@ -145,10 +136,10 @@ async function validateInput(letter) {
 
             // To find indeces of all occurence of a letter 
             // https://stackoverflow.com/questions/3410464/how-to-find-indices-of-all-occurrences-of-one-string-in-another-in-javascript 
-            const arrayOfIndices = [...guessingWord.matchAll(new RegExp(guessLetter, 'gi'))].map(a => a.index);
+            const randomLetterIndices = [...randomWord.matchAll(new RegExp(guessLetter, 'gi'))].map(a => a.index);
 
             // Check for letter not found
-            if (arrayOfIndices.length === 0) {
+            if (randomLetterIndices.length === 0) {
                 console.log(`${guessLetter} not found in answer`);
                 letterColor = 'gray'
 
@@ -156,13 +147,13 @@ async function validateInput(letter) {
                 document.getElementById(guessLetter.toUpperCase()).classList.add('white-font')
             }
             // check for one time occurrance of letter
-            else if (arrayOfIndices.length === 1) {
-                let guessArrayOfIndices = [...currentGuess.word.join('').matchAll(new RegExp(guessLetter, 'gi'))].map(a => a.index);
+            else if (randomLetterIndices.length === 1) {
+                let guessLetterIndices = [...currentGuess.word.join('').matchAll(new RegExp(guessLetter, 'gi'))].map(a => a.index);
                 let tempPosition = 0
                 let isAtSamePosition = false
                 // checking if letter occurred once in guess word
-                if (guessArrayOfIndices === 1) {
-                    if (guessLetterIndex === arrayOfIndices[0]) {
+                if (guessLetterIndices === 1) {
+                    if (guessLetterIndex === randomLetterIndices[0]) {
                         console.log(`${guessLetter} is at same position as answer`);
                         letterColor = 'green';
                     } else {
@@ -172,26 +163,24 @@ async function validateInput(letter) {
                     }
                 } else {
                     // iterate duplicate letter in guess word to find correct position
-                    for (let i = 0; i < guessArrayOfIndices.length; i++) {
-                        if (guessArrayOfIndices[i] === arrayOfIndices[0]) {
+                    for (let i = 0; i < guessLetterIndices.length; i++) {
+                        if (guessLetterIndices[i] === randomLetterIndices[0]) {
                             tempPosition = i
-                            console.log('temp pos', tempPosition);
-                            console.log('array index', arrayOfIndices);
                             isAtSamePosition = true
                         }
                     }
-                    // same position
-                    if (guessLetterIndex === arrayOfIndices[0] && isAtSamePosition === true) {
+                    // same position check
+                    if (guessLetterIndex === randomLetterIndices[0] && isAtSamePosition === true) {
                         console.log(`${guessLetter} is at same position as answer`);
                         letterColor = 'green'
                     }
-                    if (guessLetterIndex !== arrayOfIndices[0] && isAtSamePosition === true) {
+                    if (guessLetterIndex !== randomLetterIndices[0] && isAtSamePosition === true) {
                         console.log(`${guessLetter} is at different and duplicate as answer`);
                         letterColor = 'gray'
                     }
-                    if (guessLetterIndex !== arrayOfIndices[0] && isAtSamePosition === false) {
+                    if (guessLetterIndex !== randomLetterIndices[0] && isAtSamePosition === false) {
                         console.log(`${guessLetter} is at different as answer`);
-                        if (guessLetterIndex === guessArrayOfIndices[0]) {
+                        if (guessLetterIndex === guessLetterIndices[0]) {
                             letterColor = 'orange'
                         } else {
                             letterColor = 'gray'
@@ -200,11 +189,11 @@ async function validateInput(letter) {
                 }
             }
             // check for more than one occurrance of letter
-            else if (arrayOfIndices.length > 1) {
+            else if (randomLetterIndices.length > 1) {
                 let isAtSamePosition = false;
                 let tempIndex = 0
-                for (let i = 0; i < arrayOfIndices.length; i++) {
-                    if (guessLetterIndex === arrayOfIndices[i]) {
+                for (let i = 0; i < randomLetterIndices.length; i++) {
+                    if (guessLetterIndex === randomLetterIndices[i]) {
                         isAtSamePosition = true
                         tempIndex = guessLetterIndex
                     }
@@ -220,21 +209,14 @@ async function validateInput(letter) {
             }
             // color the letter according to position is correct or not
             console.log('letter color', letterColor + 'guessletter ', guessLetter);
-            document.getElementById(letterBoxPos).classList.add(letterColor);
-            document.getElementById(letterBoxPos).classList.add('white-font');
-            document.getElementById(letterBoxPos).classList.add('flip-animate');
-            document.getElementById(letterBoxPos).classList.remove('highlight');
+            colorLetter(letterBoxPos, letterColor)
         }
 
         //All letters found 
-        if (currentGuess.word.join('').toLowerCase() == guessingWord) {
+        if (currentGuess.word.join('').toLowerCase() == randomWord) {
             console.log('You win');
-            // document.getElementById('refresh').style.display = 'block';
             winStatus.textContent = 'You Won!!!'
-            winStatus.style.display = 'block'
-            winStatus.classList.add('animate')
-            winStatus.classList.add('green')
-            winStatus.classList.remove('orange')
+            createWinStatus('green', 'orange')
             letterBoxNo = 0;
             currentGuess.word = [];
             currentGuess.position = [];
@@ -243,14 +225,31 @@ async function validateInput(letter) {
         }
         if (letterBoxNo > guessContainer.length - 1) {
             console.log('End of guesses');
-            winStatus.textContent = `You Lost! Correct answer is ${guessingWord.toUpperCase()}`
-            winStatus.style.display = 'block'
-            winStatus.classList.add('animate')
-            winStatus.classList.add('orange')
-            winStatus.classList.remove('green')
+            winStatus.textContent = `You Lost! Correct answer is ${randomWord.toUpperCase()}`
+            createWinStatus('orange', 'green')
             return
         }
         currentGuess.word = [];
         currentGuess.position = [];
     }
+}
+function createMessage(text) {
+    message.textContent = text
+    message.classList.remove('hide')
+    setTimeout(() => {
+        message.classList.add('hide')
+    }, 2000);
+}
+function createWinStatus(addColor, removeColor){
+    winStatus.style.display = 'block'
+    winStatus.classList.add('animate')
+    winStatus.classList.add(addColor)
+    winStatus.classList.remove(removeColor)
+}
+function colorLetter(position, letterColor){
+    const letterPosition =  document.getElementById(position)
+    letterPosition.classList.add(letterColor);
+    letterPosition.classList.add('white-font');
+    letterPosition.classList.add('flip-animate');
+    letterPosition.classList.remove('highlight');
 }
