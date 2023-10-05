@@ -110,7 +110,9 @@ body {
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+.bi-trophy-fill{
+    color: rgb(235, 235, 18);
+}
 .popup-content {
     width: 100%;
     margin: auto;
