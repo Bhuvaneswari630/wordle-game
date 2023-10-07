@@ -8,13 +8,18 @@ const listOfWords = [
     "wreck", "court", "coast", "flake",
     "think", "smoke", "unrig", "slant",
     "ultra", "vague", "pouch", "radix",
-    "yeast", "zoned", "cause", "quick"
+    "yeast", "zoned", "cause", "quick",
+    "still", "never", "sound", "hello",
+    "world", "alloy", "allot", "baker",
+    "borne", "broke", "charm", "candy",
+    "depot", "debut", "early", "dwell",
+    "gauze", "guest", "civic", "hover" 
 ]
 const guessContainer = document.querySelectorAll('.letter-box')
 const keyLetter = document.querySelectorAll('.keyboard-btn')
 const winStatus = document.querySelector('#winning-status')
 const message = document.querySelector('.message')
-
+let guessSuccess = false
 let winstatus = false
 var currentGuess = {
     word: [],
@@ -44,13 +49,16 @@ document.addEventListener('keyup', async (e) => {
         handleInput('delete')
         return
     } else if (e.key === 'Enter') {
-        handleInput('enter')
-        return
+        if (guessSuccess || tryCount > 6) {
+            console.log('inside game end condition');
+            return    
+        } else {
+            handleInput('enter')
+        }
     } else if (!validKey || validKey.length > 1) {
         return
     } else {
         handleInput(e.key.toUpperCase())
-        return
     }
 
 })
@@ -103,7 +111,8 @@ async function validateInput(letter) {
     // when user clicks enter button
     if (letter === 'enter') {
         console.log('Guess', currentGuess.word.join(''));
-
+        document.querySelector('#enter').disabled = true
+        document.querySelector('#enter').disabled = false
         // Check if entered word is 5-letter word
         if (currentGuess.word.length < 5) {
             showMessage('Guess a 5 letter word')
@@ -130,8 +139,7 @@ async function validateInput(letter) {
         endGame()
         currentGuess.word = [];
         currentGuess.position = [];
-        document.querySelector('#enter').disabled = true
-        document.querySelector('#enter').disabled = false
+        
     }
 }
 
@@ -153,7 +161,7 @@ function validateLetter() {
         }
         // check for more than one occurrance of letter
         if (randomLetterIndices.length > 1) {
-            letterColor = manyTimesOccurrenceCheck(guessLetter, guessLetterIndex, randomLetterIndices)
+            letterColor = manyTimesOccurrenceCheck(guessLetterIndex, randomLetterIndices)
         }
         // color the letter according to position is correct or not
         console.log('letter color', letterColor + 'guessletter ', guessLetter);
@@ -178,11 +186,8 @@ function oneTimeOccurrenceCheck(guessLetter, guessLetterIndex, randomLetterIndic
     // checking if letter occurred once in guess word
     if (guessLetterIndices === 1) {
         if (guessLetterIndex === randomLetterIndices[0]) {
-            // console.log(`${guessLetter} is at same position as answer`);
             letterColor = 'green';
         } else {
-
-            // console.log(`${guessLetter} is at different position as answer`);
             letterColor = 'orange';
         }
     } else {
@@ -193,15 +198,12 @@ function oneTimeOccurrenceCheck(guessLetter, guessLetterIndex, randomLetterIndic
 
         // same position check
         if (guessLetterIndex === randomLetterIndices[0] && isAtSamePosition === true) {
-            // console.log(`${guessLetter} is at same position as answer`);
             letterColor = 'green'
         }
         if (guessLetterIndex !== randomLetterIndices[0] && isAtSamePosition === true) {
-            // console.log(`${guessLetter} is at different and duplicate as answer`);
             letterColor = 'gray'
         }
         if (guessLetterIndex !== randomLetterIndices[0] && isAtSamePosition === false) {
-            // console.log(`${guessLetter} is at different as answer`);
             if (guessLetterIndex === guessLetterIndices[0]) {
                 letterColor = 'orange'
             } else {
@@ -212,7 +214,7 @@ function oneTimeOccurrenceCheck(guessLetter, guessLetterIndex, randomLetterIndic
     return letterColor
 }
 
-function manyTimesOccurrenceCheck(guessLetter, guessLetterIndex, randomLetterIndices) {
+function manyTimesOccurrenceCheck(guessLetterIndex, randomLetterIndices) {
     let isAtSamePosition = false;
     let tempIndex = 0
     for (let i = 0; i < randomLetterIndices.length; i++) {
@@ -222,10 +224,8 @@ function manyTimesOccurrenceCheck(guessLetter, guessLetterIndex, randomLetterInd
         }
     }
     if (isAtSamePosition) {
-        // console.log(`${guessLetter} at ${tempIndex} same as answer`);
         letterColor = 'green';
     } else {
-        // console.log(`${guessLetter} is at different position as answer`);
         letterColor = 'orange'
     }
     tempIndex = 0
@@ -242,13 +242,15 @@ function allLettersMatch() {
         currentGuess.position = [];
         document.getElementById('enter').disabled = true
         document.querySelector('#refresh').disabled = false
+        guessSuccess = true
         return
     }
 }
 
 function endGame() {
-    if (tryCount >= 6) {
+    if (tryCount >= 6 && !guessSuccess) {
         console.log('End of guesses');
+        tryCount += 1
         winStatus.textContent = `You Lost! Correct answer is ${randomWord.toUpperCase()}`
         showWinStatus('orange', 'green')
         document.getElementById('enter').disabled = true
@@ -309,6 +311,7 @@ function refreshPage() {
     document.getElementById('delete').disabled = false
     word = ''
     tryCount = 0
+    guessSuccess = false
     document.querySelector('#refresh').disabled = true
     document.querySelector('#refresh').disabled = false
 }

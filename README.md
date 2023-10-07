@@ -15,11 +15,15 @@ Tile color changes accordingly:
 
 Functionalities in the game.
 refreshPage - resets the game board
-getRandommWord - 
+getRandommWord - gets random word from list of words
+validateWord - calls dictionary api to check the input word is a vlaid english word
 
 Citations
 To find indeces of all occurence of a letter :
 https://stackoverflow.com/questions/3410464/how-to-find-indices-of-all-occurrences-of-one-string-in-another-in-javascript 
+
+To add key press event and to find pressed key is a letter
+https://www.freecodecamp.org/news/build-a-wordle-clone-in-javascript/
 
 API used to find out entered word is a valid english word
 https://api.dictionaryapi.dev/api/v2/entries/en/
