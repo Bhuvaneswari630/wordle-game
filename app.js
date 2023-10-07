@@ -26,15 +26,10 @@ let word = ''
 let randomWord
 // Get a random word from list of words
 randomWord = getRandomWord();
-// let randomWord = 'rooms'
 console.log('guessing word', randomWord.toUpperCase());
-
-// Show rules div
-// document.getElementById('question').addEventListener('click', () => showRules())
 
 // Refresh page when refresh button clicked
 document.querySelector('#refresh').addEventListener('click', () => {
-    // console.log('refresh button clicked');
     refreshPage()
     return
 })
@@ -44,20 +39,16 @@ keyLetter.forEach((char) => char.addEventListener('click', async (e) => handleIn
 
 // add event listener for key pressed in keyboard
 document.addEventListener('keyup', async (e) => {
-    // console.log('from keyboard', e.key);
     let validKey = e.key.match(/[a-z]/gi)
-    // console.log('valid status', validKey);
     if (e.key === 'Backspace') {
         handleInput('delete')
         return
     } else if (e.key === 'Enter') {
-        // console.log('inside enter', currentGuess.word.length + 'guess', currentGuess.word.join(''));
         handleInput('enter')
         return
     } else if (!validKey || validKey.length > 1) {
         return
     } else {
-        // console.log('inside key input', currentGuess.word);
         handleInput(e.key.toUpperCase())
         return
     }
@@ -65,11 +56,9 @@ document.addEventListener('keyup', async (e) => {
 })
 
 async function handleInput(letter) {
-    // const letter = e.target.id
     writeInput(letter)
     await validateInput(letter)
 }
-
 
 function getRandomWord() {
     let randomNo = Math.floor(Math.random() * listOfWords.length);
@@ -90,7 +79,6 @@ function writeInput(letter) {
     if (letter !== 'delete' && letter !== 'enter' && letter !== 'refresh') {
         // Write only words length is less than 5
         if (currentGuess.word.length < 5) {
-            // console.log(currentGuess.word.length);
             guessContainer[letterBoxNo].value = letter;
             guessContainer[letterBoxNo].classList.add('highlight');
             letterBoxNo += 1;
@@ -176,7 +164,6 @@ function validateLetter() {
 function letterNotFound(guessLetter, randomLetterIndices) {
     // letterNotFound(randomLetterIndices)
     if (randomLetterIndices.length === 0) {
-        // console.log(`${guessLetter} not found in answer`);
         letterColor = 'gray'
         const posNotFound = document.getElementById(guessLetter.toUpperCase())
         posNotFound.classList.add('keyboard-gray')
@@ -316,12 +303,6 @@ function refreshPage() {
     winStatus.style.display = 'none'
     currentGuess.word = [];
     currentGuess.position = [];
-    // var currentGuess = {
-    //     word: [],
-    //     position: []
-    // };
-    // let letterBoxNo = 0;
-    // let word = ''
     randomWord = getRandomWord()
     console.log('guessing word', randomWord.toUpperCase());
     document.getElementById('enter').disabled = false
@@ -330,14 +311,4 @@ function refreshPage() {
     tryCount = 0
     document.querySelector('#refresh').disabled = true
     document.querySelector('#refresh').disabled = false
-}
-
-function showRules() {
-    const rule = document.getElementById('rules')
-    // console.log(rule);
-    if (rule.style.display === 'none') {
-        rule.style.display = 'block'
-    } else {
-        rule.style.display = 'none'
-    }
 }
