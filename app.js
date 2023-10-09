@@ -13,7 +13,7 @@ const listOfWords = [
     "world", "alloy", "allot", "baker",
     "borne", "broke", "charm", "candy",
     "depot", "debut", "early", "dwell",
-    "gauze", "guest", "civic", "hover" 
+    "gauze", "guest", "civic", "hover"
 ]
 const guessContainer = document.querySelectorAll('.letter-box')
 const keyLetter = document.querySelectorAll('.keyboard-btn')
@@ -51,7 +51,7 @@ document.addEventListener('keyup', async (e) => {
     } else if (e.key === 'Enter') {
         if (guessSuccess || tryCount > 6) {
             console.log('inside game end condition');
-            return    
+            return
         } else {
             handleInput('enter')
         }
@@ -139,7 +139,7 @@ async function validateInput(letter) {
         endGame()
         currentGuess.word = [];
         currentGuess.position = [];
-        
+
     }
 }
 
@@ -235,7 +235,7 @@ function manyTimesOccurrenceCheck(guessLetterIndex, randomLetterIndices) {
 function allLettersMatch() {
     if (currentGuess.word.join('').toLowerCase() == randomWord) {
         console.log('You win');
-        winStatus.innerHTML = `<p>You Won!!! <i class="bi bi-trophy-fill"></i></p><p>Answer found in ${tryCount} guesses</p>`
+        winStatus.innerHTML = `<p>You Won!!! <i class="bi bi-trophy-fill"></i></p><p>Answer found in ${tryCount} ${tryCount > 1 ? 'guesses' : 'guess'}</p>`
         showWinStatus('green', 'orange')
         letterBoxNo = 0;
         currentGuess.word = [];

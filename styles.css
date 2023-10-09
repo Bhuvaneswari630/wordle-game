@@ -3,12 +3,9 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background: linear-gradient(90deg, #71d0fc, #9cd9f1);
 }
-.header{
-    display: flex;
-    flex-direction: row;
-}
 .container {
     margin: auto;
+    padding: 10px;
     display: grid;
     grid-template-columns: auto auto;
 }
