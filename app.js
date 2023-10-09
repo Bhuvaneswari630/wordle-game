@@ -13,7 +13,9 @@ const listOfWords = [
     "world", "alloy", "allot", "baker",
     "borne", "broke", "charm", "candy",
     "depot", "debut", "early", "dwell",
-    "gauze", "guest", "civic", "hover"
+    "gauze", "guest", "civic", "hover",
+    "image", "argue", "adieu", "dream",
+    "minor", "canoe", "audio", "twist"
 ]
 const guessContainer = document.querySelectorAll('.letter-box')
 const keyLetter = document.querySelectorAll('.keyboard-btn')
@@ -44,6 +46,8 @@ keyLetter.forEach((char) => char.addEventListener('click', async (e) => handleIn
 
 // add event listener for key pressed in keyboard
 document.addEventListener('keyup', async (e) => {
+    // To add key press event and to find pressed key is a letter
+    // https://www.freecodecamp.org/news/build-a-wordle-clone-in-javascript/
     let validKey = e.key.match(/[a-z]/gi)
     if (e.key === 'Backspace') {
         handleInput('delete')
@@ -64,6 +68,7 @@ document.addEventListener('keyup', async (e) => {
 })
 
 async function handleInput(letter) {
+
     writeInput(letter)
     await validateInput(letter)
 }
@@ -87,11 +92,7 @@ function writeInput(letter) {
     if (letter !== 'delete' && letter !== 'enter' && letter !== 'refresh') {
         // Write only words length is less than 5
         if (currentGuess.word.length < 5) {
-            guessContainer[letterBoxNo].value = letter;
-            guessContainer[letterBoxNo].classList.add('highlight');
-            letterBoxNo += 1;
-            currentGuess.word.push(letter)
-            currentGuess.position.push(letterBoxNo)
+            displayLetter(letter)
         }
         if (currentGuess.word.length == 5) {
             console.log(currentGuess.word);
@@ -99,14 +100,23 @@ function writeInput(letter) {
     }
     // When user clicks delete button 
     if (letter === 'delete' && letterBoxNo > word.length) {
-        guessContainer[letterBoxNo - 1].value = '';
-        guessContainer[letterBoxNo - 1].classList.remove('highlight');
-        letterBoxNo -= 1;
-        currentGuess.word.pop()
-        currentGuess.position.pop()
+        deleteLetter()
     }
 }
-
+function displayLetter(letter) {
+    guessContainer[letterBoxNo].value = letter;
+    guessContainer[letterBoxNo].classList.add('highlight');
+    letterBoxNo += 1;
+    currentGuess.word.push(letter)
+    currentGuess.position.push(letterBoxNo)
+}
+function deleteLetter() {
+    guessContainer[letterBoxNo - 1].value = '';
+    guessContainer[letterBoxNo - 1].classList.remove('highlight');
+    letterBoxNo -= 1;
+    currentGuess.word.pop()
+    currentGuess.position.pop()
+}
 async function validateInput(letter) {
     // when user clicks enter button
     if (letter === 'enter') {
