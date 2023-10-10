@@ -21,6 +21,7 @@ const guessContainer = document.querySelectorAll('.letter-box')
 const keyLetter = document.querySelectorAll('.keyboard-btn')
 const winStatus = document.querySelector('#winning-status')
 const message = document.querySelector('.message')
+const toggle = document.getElementById('rules-button')
 let guessSuccess = false
 let winstatus = false
 var currentGuess = {
@@ -31,9 +32,26 @@ let letterBoxNo = 0;
 let tryCount = 0;
 let word = ''
 let randomWord
+
 // Get a random word from list of words
 randomWord = getRandomWord();
 console.log('guessing word', randomWord.toUpperCase());
+// show rules on page
+toggle.addEventListener('click', () => {
+    document.querySelector('.rules').classList.toggle('hide')
+    const ruleBtn = document.querySelector('#rules-button')
+    ruleBtn.disabled = true
+    ruleBtn.disabled = false
+    if (ruleBtn.textContent === 'Show rules') {
+        ruleBtn.textContent = 'Hide rules'
+        document.getElementById('rules').classList.add('col-4')
+    } else {
+        ruleBtn.textContent = 'Show rules'
+        document.getElementById('rules').classList.remove('col-4')
+
+    }
+
+})
 
 // Refresh page when refresh button clicked
 document.querySelector('#refresh').addEventListener('click', () => {

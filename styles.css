@@ -103,6 +103,9 @@ body {
 .keyboard-higlight{
     background-color: #b2cbf8;
 }
+.rules-btn{
+    background-color: #7698d6;
+}
 #refresh {
     display: block;
     margin: auto;

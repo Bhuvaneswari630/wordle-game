@@ -102,45 +102,48 @@
                     </div>
                 </div>
                 <div>
-                    <button id='refresh' class="btn keyboard-btn mt-1" onclick="refreshPage()">Refresh</button>
+                    <button id='refresh' class="btn keyboard-btn mt-1">Refresh</button>
                 </div>
             </div>
-            
-            <div class="col-4" id="rules">
-                <h2>How To Play</h2>
-                <div class="rules-subset">
-                    <h4>Guess the word in 6 tries</h4>
-                    <ul>
-                        <li>Each guess must be a 5-letter word.</li>
-                        <li>The color of tiles will change to show how close your guess was to the word.</li>
-                    </ul>
-                </div>
 
-                <h2>Examples</h2>
-                <div class="rule-row-letter">
-                    <div class="rule-letter-box green white-font">C</div>
-                    <div class="rule-letter-box">L</div>
-                    <div class="rule-letter-box">O</div>
-                    <div class="rule-letter-box">C</div>
-                    <div class="rule-letter-box">K</div>
+            <div class="col-2" id="rules">
+                <button id="rules-button" class="btn rules-btn">Show rules</button>
+                <div class="rules hide">
+                    <h2>How To Play</h2>
+                    <div class="rules-subset">
+                        <h4>Guess the word in 6 tries</h4>
+                        <ul>
+                            <li>Each guess must be a 5-letter word.</li>
+                            <li>The color of tiles will change to show how close your guess was to the word.</li>
+                        </ul>
+                    </div>
+
+                    <h2>Examples</h2>
+                    <div class="rule-row-letter">
+                        <div class="rule-letter-box green white-font">C</div>
+                        <div class="rule-letter-box">L</div>
+                        <div class="rule-letter-box">O</div>
+                        <div class="rule-letter-box">C</div>
+                        <div class="rule-letter-box">K</div>
+                    </div>
+                    <p><b>C</b> is in the word and is in correct spot</p>
+                    <div class="rule-row-letter">
+                        <div class="rule-letter-box">A</div>
+                        <div class="rule-letter-box">R</div>
+                        <div class="rule-letter-box orange white-font">E</div>
+                        <div class="rule-letter-box">A</div>
+                        <div class="rule-letter-box">S</div>
+                    </div>
+                    <p><b>E</b> is in the word but in the wrong spot</p>
+                    <div class="rule-row-letter">
+                        <div class="rule-letter-box">L</div>
+                        <div class="rule-letter-box">E</div>
+                        <div class="rule-letter-box">A</div>
+                        <div class="rule-letter-box gray white-font">R</div>
+                        <div class="rule-letter-box">N</div>
+                    </div>
+                    <p><b>R</b> is not in the word in any spot</p>
                 </div>
-                <p><b>C</b> is in the word and is in correct spot</p>
-                <div class="rule-row-letter">
-                    <div class="rule-letter-box">A</div>
-                    <div class="rule-letter-box">R</div>
-                    <div class="rule-letter-box orange white-font">E</div>
-                    <div class="rule-letter-box">A</div>
-                    <div class="rule-letter-box">S</div>
-                </div>
-                <p><b>E</b> is in the word but in the wrong spot</p>
-                <div class="rule-row-letter">
-                    <div class="rule-letter-box">L</div>
-                    <div class="rule-letter-box">E</div>
-                    <div class="rule-letter-box">A</div>
-                    <div class="rule-letter-box gray white-font">R</div>
-                    <div class="rule-letter-box">N</div>
-                </div>
-                <p><b>R</b> is not in the word in any spot</p>
             </div>
 
         </div>
