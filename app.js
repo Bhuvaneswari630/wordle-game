@@ -1,21 +1,14 @@
 const listOfWords = [
-    'about', 'above', 'actor', 'acute',
-    'brown', 'build', 'built', 'chain',
-    'chair', 'chart', 'chase', 'cheap',
-    'check', 'rooms', 'sleek', "alert",
-    "check", "roast", "toast", "shred",
-    "cheek", "shock", "think", "woman",
-    "wreck", "court", "coast", "flake",
-    "think", "smoke", "unrig", "slant",
-    "ultra", "vague", "pouch", "radix",
-    "yeast", "zoned", "cause", "quick",
-    "still", "never", "sound", "hello",
-    "world", "alloy", "allot", "baker",
-    "borne", "broke", "charm", "candy",
-    "depot", "debut", "early", "dwell",
-    "gauze", "guest", "civic", "hover",
-    "image", "argue", "adieu", "dream",
-    "minor", "canoe", "audio", "twist"
+    "about", "above", "actor", "acute", "brown", "build", "built", "chain",
+    "chair", "chart", "chase", "cheap", "check", "rooms", "sleek", "alert",
+    "check", "roast", "toast", "shred", "cheek", "shock", "think", "woman",
+    "wreck", "court", "coast", "flake", "think", "smoke", "unrig", "slant",
+    "ultra", "vague", "pouch", "radix", "yeast", "zoned", "cause", "quick",
+    "still", "never", "sound", "hello", "world", "alloy", "allot", "baker",
+    "borne", "broke", "charm", "candy", "depot", "debut", "early", "dwell",
+    "gauze", "guest", "civic", "hover", "image", "argue", "adieu", "dream",
+    "minor", "canoe", "audio", "twist", "proxy", "saute", "irony", "avert",
+    "odium", "plumb", "blind", "event", "agree", "quake", "occur", "jumps"
 ]
 const guessContainer = document.querySelectorAll('.letter-box')
 const keyLetter = document.querySelectorAll('.keyboard-btn')
@@ -36,22 +29,9 @@ let randomWord
 // Get a random word from list of words
 randomWord = getRandomWord();
 console.log('guessing word', randomWord.toUpperCase());
+
 // show rules on page
-toggle.addEventListener('click', () => {
-    document.querySelector('.rules').classList.toggle('hide')
-    const ruleBtn = document.querySelector('#rules-button')
-    ruleBtn.disabled = true
-    ruleBtn.disabled = false
-    if (ruleBtn.textContent === 'Show rules') {
-        ruleBtn.textContent = 'Hide rules'
-        document.getElementById('rules').classList.add('col-4')
-    } else {
-        ruleBtn.textContent = 'Show rules'
-        document.getElementById('rules').classList.remove('col-4')
-
-    }
-
-})
+toggle.addEventListener('click', () => handleToggle())
 
 // Refresh page when refresh button clicked
 document.querySelector('#refresh').addEventListener('click', () => {
@@ -342,4 +322,18 @@ function refreshPage() {
     guessSuccess = false
     document.querySelector('#refresh').disabled = true
     document.querySelector('#refresh').disabled = false
+}
+function handleToggle() {
+    document.querySelector('.rules').classList.toggle('hide')
+    const ruleBtn = document.querySelector('#rules-button')
+    ruleBtn.disabled = true
+    ruleBtn.disabled = false
+    if (ruleBtn.textContent === 'Show rules') {
+        ruleBtn.textContent = 'Hide rules'
+        document.getElementById('rules').classList.add('col-4')
+    } else {
+        ruleBtn.textContent = 'Show rules'
+        document.getElementById('rules').classList.remove('col-4')
+
+    }
 }

@@ -13,8 +13,9 @@ Highlight the letters of guessed word to give clues to user when a valid word is
 Tile color and Description:
 1. Letter in correct position - green color
 2. Letter exists but in wrong position - orange color
-3. Letter not present in actual work - gray color
-When user guesses the correct work, display win status
+3. Letter not present in actual word - gray color
+
+When user guesses the correct word, display win status
 When uses make 6 wrong guesses, display lose status
 
 Citations:
