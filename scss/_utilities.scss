@@ -1,0 +1,33 @@
+@function text-color-picker($color) {
+    @if(lightness($color) > 90) {
+      @return black;
+    } @else {
+      @return white;
+    }
+  }
+  
+@function adjust-color($color) {
+    @return lighten($color, 20%);
+}
+
+@mixin flex($direction: row, $justify: center, $align: center) {
+   display: flex;
+   flex-direction: $direction;
+   justify-content: $justify;
+   align-items: $align;
+};
+
+@mixin block($align: center) {
+    display: block;
+    text-align: $align;
+}
+
+@mixin grid($grid-template: auto) {
+    display: grid;
+    grid-template-columns: $grid-template;
+}
+
+@mixin dimension($width: auto, $height: auto) {
+    width: $width;
+    height: $height;
+}

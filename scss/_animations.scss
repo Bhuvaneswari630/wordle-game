@@ -1,0 +1,21 @@
+@keyframes pop-up {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes flip-out {
+    0% {
+        transform: rotateY(-90deg)
+    }
+
+    100% {
+        transform: rotateY(0)
+    }
+}

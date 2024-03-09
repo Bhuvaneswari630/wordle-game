@@ -1,0 +1,153 @@
+@import 'config';
+@import 'utilities';
+@import 'animations';
+
+body {
+        text-align: center;
+        font-family: $font-family;
+        background: $background;
+}
+
+.container {
+    @include grid(auto auto);
+    margin: auto;
+    padding: 10px;
+
+    .game-board {
+        @include flex(column, center, normal);
+        @include dimension(100%);
+        margin: 0 auto;
+        max-width: 600px;
+        position: relative;
+
+        .grid-container {
+            margin: auto;
+            @include grid(auto);
+        }
+    }
+}
+
+#rules{
+    text-align: left;
+    #rules-button {
+        &:hover {
+            transform: scale(1.2);
+            }
+    }
+}
+
+.row-letter, .rule-row-letter {
+    @include grid(auto auto auto auto auto);
+    @include dimension(100%);
+    margin: 0.2em 0.2em;
+    column-gap: 0.2em;
+}
+
+.letter-box, .rule-letter-box {
+    @include dimension(2em, 2em);
+    @include block(center);
+    background-color: $letter-background;
+    font-size: 2em;
+    font-weight: 500;
+    border: 1px solid $letter-border;
+    border-radius: 5px;
+    line-height: 1;
+    padding: 10px 0;
+    text-transform: uppercase;
+}
+
+.keyboard-container {
+    @include dimension(auto, auto);
+    @include flex(column);
+}
+
+.keyboard-row {
+    @include flex(row, space-between);
+    @include dimension(95%, auto);
+    margin: auto;
+}
+
+.keyboard-btn {
+    @include flex(row, center, center);
+    margin: 3px;
+    flex: 1;
+    font-size: 1.5em;
+    background-color: $keyboard-btn-color;
+    transition: .2s;
+    &:hover {
+        background-color: $keyboard-btn-hover;
+        transform: scale(.95);
+    }
+}
+
+#refresh {
+    @include block(center);
+    margin: auto;
+}
+
+.white-font {
+    color: $white;
+    font-weight: 600;
+}
+
+.highlight {
+    border: 2px solid $highlight;
+}
+// @each flow control use
+$colors: ('green': $green, 'orange': $orange, 'gray': $gray);
+
+@each $name, $color in $colors {
+    .#{$name} {
+        background-color: adjust-color($color);
+    }
+} 
+
+.keyboard-gray {
+    background-color: $keyboard-gray;
+    color: text-color-picker($keyboard-gray);
+}
+.keyboard-higlight{
+    background-color: $keyboard-highlight;
+}
+.rules-btn{
+    background-color: $rules-btn-color;
+}
+
+.hide {
+    display: none;
+}
+
+#winning-status {
+    @include dimension(100%);
+    margin: auto;
+    display: none;
+    position: relative;
+    font-size: 1.5em;
+    line-height: .2em;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+    margin: auto;
+    font-size: 1.5em;
+}
+
+.bi-trophy-fill {
+    color: rgb(235, 235, 18);
+}
+
+.animate {
+    animation: pop-up 1s ease-out forwards;
+}
+
+.flip-animate {
+    animation: flip-out 1s ease-in
+}
+
+$font-size: 1em;
+@if $font-size < 2em {
+    @warn "Font size is so small"
+}

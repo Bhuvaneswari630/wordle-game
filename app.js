@@ -183,7 +183,7 @@ function letterNotFound(guessLetter, randomLetterIndices) {
         letterColor = 'gray'
         const posNotFound = document.getElementById(guessLetter.toUpperCase())
         posNotFound.classList.add('keyboard-gray')
-        posNotFound.classList.add('white-font')
+        // posNotFound.classList.add('white-font')
         return letterColor
     }
 }
@@ -306,7 +306,7 @@ function refreshPage() {
     // guessContainer[0].focus();
     keyLetter.forEach((key) => {
         key.classList.remove('keyboard-gray');
-        key.classList.remove('white-font');
+        // key.classList.remove('white-font');
     })
     winStatus.innerHTML = ''
     winStatus.textContent = ''

@@ -1,0 +1,172 @@
+body {
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  background: linear-gradient(90deg, #d5ebf4, #71d0fc);
+}
+
+.container {
+  margin: auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.container .game-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+}
+.container .game-board .grid-container {
+  margin: auto;
+  display: grid;
+}
+
+#rules {
+  text-align: left;
+}
+
+.row-letter, .rule-row-letter {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto auto auto auto auto;
+  -moz-column-gap: 0.2em;
+       column-gap: 0.2em;
+  margin: 0.2em 0;
+}
+
+.letter-box, .rule-letter-box {
+  background-color: #fbfcff;
+  font-size: 2em;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  display: block;
+  border: 1px solid #dee1e9;
+  border-radius: 10px;
+  line-height: 1;
+  font-weight: 500;
+  padding: 10px 0;
+  text-transform: uppercase;
+}
+
+.keyboard-container {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.keyboard-row {
+  width: 95%;
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.keyboard-btn {
+  display: flex;
+  margin: 3px;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  font-size: 1.5em;
+  background-color: #7698d6;
+  transition: 0.2s;
+}
+.keyboard-btn:hover {
+  background-color: #b2cbf8;
+}
+
+.white-font {
+  color: #fff;
+  font-weight: 600;
+}
+
+.highlight {
+  border: 2px solid #abb8d1;
+}
+
+.green {
+  background-color: #8dd65f;
+}
+
+.orange {
+  background-color: #f7c848;
+}
+
+.gray {
+  background-color: #adb6c7;
+}
+
+.keyboard-gray {
+  background-color: #a1c1f7;
+}
+
+.keyboard-higlight {
+  background-color: #b2cbf8;
+}
+
+.rules-btn {
+  background-color: #7698d6;
+}
+
+#refresh {
+  display: block;
+  margin: auto;
+}
+
+.hide {
+  display: none;
+}
+
+#winning-status {
+  width: 100%;
+  margin: auto;
+  display: none;
+  position: relative;
+  font-size: 1.5em;
+  line-height: 0.2em;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  margin: auto;
+  font-size: 1.5em;
+}
+
+.bi-trophy-fill {
+  color: rgb(235, 235, 18);
+}
+
+.animate {
+  animation: pop-up 1s ease-out forwards;
+}
+
+@keyframes pop-up {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.flip-animate {
+  animation: flip-out 1s ease-in;
+}
+
+@keyframes flip-out {
+  0% {
+    transform: rotateY(-90deg);
+  }
+  100% {
+    transform: rotateY(0);
+  }
+}/*# sourceMappingURL=style.css.map */
